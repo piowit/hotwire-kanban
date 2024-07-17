@@ -1,24 +1,27 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple application to experiment with Turbo.
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+This application uses:
+- ruby 3.3.0
+- sqlite 3
+- redis
 
-* System dependencies
+Have them installed, clone repo and run:
 
-* Configuration
+```
+$ bundle
+$ rails db:setup
+```
 
-* Database creation
+You can run `rails db:seed` many times to have more data.
 
-* Database initialization
+Use `rails s` to run the server.
 
-* How to run the test suite
+## Testing
 
-* Services (job queues, cache servers, search engines, etc.)
+Run `$ rspec` for tests.
 
-* Deployment instructions
-
-* ...
+Run `$ rubocop` for linter check.
