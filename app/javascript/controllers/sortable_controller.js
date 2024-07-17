@@ -59,15 +59,12 @@ export default class extends Controller {
     const url = this.urlValue.replace(":id", id);
 
     const card = {
-      position: newIndex,
+      position: newIndex + 1,
       board_column_id: newColumnId,
     };
 
     const body = {
-      _method: 'patch',
-      authenticity_token: document.querySelector("[name='csrf-token']").content,
       card: card,
-      commit: 'Save'
     };
 
     put(url, {
