@@ -46,4 +46,11 @@ body, html {
   min-height: 100%;
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #EFF0F1;
+  border: 1px solid #DFE1E3;
+}
+
+.board-column-footer {
+  margin-top: 1rem;
+  text-align: center;
 }
