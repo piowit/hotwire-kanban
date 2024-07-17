@@ -14,18 +14,18 @@
 
 <div class="board-container">
   <div class="board-scroll" data-controller="sortable" data-sortable-group-value="<%= @board.id %>" data-sortable-url-value="<%= update_card_positions_board_column_path(":id") %>">
-    <% @board_columns.each do |column| %>
-      <div class="board-column bg-primary-grey-100 border border-primary-grey-200" data-sortable-column-id-value="<%= column.id %>">
-        <%= render partial: 'boards/column_header', locals: { column: column } %>
-        <div id= <%= dom_id(column, :column_body) %>, class="board-column-body", data-sortable-target="cardsContainer">
-          <% column.cards.order(:position).each do |card| %>
+    <% @board_columns.each do |board_column| %>
+      <div class="board-column bg-primary-grey-100 border border-primary-grey-200" data-sortable-column-id-value="<%= board_column.id %>">
+        <%= render partial: 'boards/column_header', locals: { board_column: board_column } %>
+        <div id= <%= dom_id(board_column, :column_body) %>, class="board-column-body", data-sortable-target="cardsContainer">
+          <% board_column.cards.order(:position).each do |card| %>
             <div class="my-1 draggable_card" data-sortable-id="<%= card.id %>">
               <%= render partial: 'cards/card', locals: { card: card } %>
             </div>
           <% end %>
         </div>
         <div class="board-column-footer text-center mt-4">
-          <%= link_to new_card_url(board_column_id: column.id), class: 'text-success fs-2' do %>
+          <%= link_to new_card_url(board_column_id: board_column.id), class: 'text-success fs-2' do %>
             <div class="fa-solid fa-plus"></div>
           <% end %>
         </div>
