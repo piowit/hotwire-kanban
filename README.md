@@ -229,3 +229,18 @@ Add turbo frames to board headers to edit board name in place
 
 
 **Branch with all edits-in-place:** `git checkout turbo-frames-edits`
+
+### Task 4: Fix show board link
+
+1. Update `app/views/boards/index.html.erb` - add `data: { turbo_frame: '_top' }` to show link:
+   <details>
+    <summary>Updated file:</summary>
+
+    ```erb
+    <h5 class="card-title mb-0">
+        <%= link_to board.name, board, data: { turbo_frame: '_top'}, class: 'link-underline link-underline-opacity-0' %>
+    </h5>
+    ```
+</details>
+
+**Branch with fixed link:** `git checkout turbo-frames-top`
