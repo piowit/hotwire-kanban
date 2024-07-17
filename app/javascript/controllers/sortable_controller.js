@@ -10,20 +10,46 @@ export default class extends Controller {
 
   static targets = ["cardsContainer"];
 
+  constructor(...args) {
+    super(...args);
+    this.sortables = [];
+  }
+
   connect() {
-    // Initialize Sortable on all card containers using targets
-    this.sortables = this.cardsContainerTargets.map(container => {
-      return Sortable.create(container, {
-        group: this.groupValue,
-        onEnd: this.onEnd.bind(this),
-        animation: 150
-      });
-    });
+    this.initializeSortable();
   }
 
   disconnect() {
-    // Destroy all sortables
-    this.sortables.forEach(sortable => sortable.destroy());
+    this.destroySortable();
+  }
+
+  initializeSortable() {
+    this.cardsContainerTargets.forEach(container => {
+      const existingSortable = this.sortables.find(sortable => sortable.el === container);
+      if (!existingSortable) {
+        const sortable = Sortable.create(container, {
+          group: this.groupValue,
+          onEnd: this.onEnd.bind(this),
+          animation: 150
+        });
+        this.sortables.push(sortable);
+      }
+    });
+  }
+
+  destroySortable() {
+    if (this.sortables) {
+      this.sortables.forEach(sortable => sortable.destroy());
+      this.sortables = [];
+    }
+  }
+
+  cardsContainerTargetConnected() {
+    this.initializeSortable();
+  }
+
+  cardsContainerTargetDisconnected() {
+    this.initializeSortable();
   }
 
   onEnd(event) {
