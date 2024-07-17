@@ -58,8 +58,20 @@ export default class extends Controller {
     const newColumnId = to.closest('.board-column').dataset.sortableColumnIdValue;
     const url = this.urlValue.replace(":id", id);
 
+    const card = {
+      position: newIndex,
+      board_column_id: newColumnId,
+    };
+
+    const body = {
+      _method: 'patch',
+      authenticity_token: document.querySelector("[name='csrf-token']").content,
+      card: card,
+      commit: 'Save'
+    };
+
     put(url, {
-      body: JSON.stringify({ position: newIndex, column_id: newColumnId }),
+      body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json',
         'X-CSRF-Token': document.querySelector("[name='csrf-token']").content
