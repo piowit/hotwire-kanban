@@ -7,13 +7,4 @@ class BoardColumn < ApplicationRecord
   validates :name, presence: true
 
   broadcasts_to ->(board_column) { "board_#{board_column.board_id}" }, inserts_by: :append, target: [ :board, :columns ]
-
-  # after_commit :broadcast_column
-
-  def broadcast_column
-    broadcast_replace_to(dom_id(board),
-                         target: dom_id(self),
-                         partial: "board_columns/board_column",
-                         locals: { board_column: self })
-  end
 end
